@@ -33,7 +33,7 @@ EOF
 */
 
 data "aws_s3_bucket" "users_bucket" {
-  bucket = "users-key-bucket-tf"
+  bucket = "users-key-tf"
 }
 # Create the object inside the token bucket
 resource "aws_s3_bucket_object" "tokens" {
