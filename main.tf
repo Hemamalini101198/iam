@@ -11,26 +11,6 @@ resource "aws_iam_user" "iam-user" {
 resource "aws_iam_access_key" "access_key" {
 	user = aws_iam_user.iam-user.name
 }
-/*
-# Create the bucket for storing tokens
-resource "aws_s3_bucket" "token" {
-  bucket = "my-token-bucket-tf-keys"
-  acl    = "private"
-}
-
-# Create the object inside the token bucket
-resource "aws_s3_bucket_object" "tokens" {
-  bucket                 = aws_s3_bucket.token.id
-  key                    = var.keys
-  server_side_encryption = "AES256"
-  content_type = "text/plain"
-  content = <<EOF
-access_id: ${aws_iam_access_key.access_key.id}
-access_secret: ${aws_iam_access_key.access_key.secret}
-EOF
-  depends_on = [ aws_iam_access_key.access_key ]
-}
-*/
 
 data "aws_s3_bucket" "users_bucket" {
   bucket = "users-key-tf"
@@ -56,7 +36,6 @@ resource "aws_iam_user_policy_attachment" "user-policy" {
   policy_arn = "arn:aws:iam::aws:policy/AmazonS3FullAccess"
   user = aws_iam_user.iam-user.name
 }
-
 
 
 /*
