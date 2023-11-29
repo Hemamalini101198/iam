@@ -11,6 +11,14 @@ terraform {
   }
 }
 
+locals {
+  backend_config = {
+    bucket = "tf-statefiles-bucket"
+    key    = local.key_prefix != "" ? "${local.key_prefix}/terraform.tfstate" : "terraform.tfstate"
+    region = "ap-south-1"
+  }
+}
+
 #iam user creation
 resource "aws_iam_user" "iam-user" {
   name = "${var.user_name}"
