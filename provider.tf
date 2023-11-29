@@ -1,11 +1,8 @@
 terraform {
-  backend "s3" {
-    key            = "iam/${terraform.workspace}/terraform.tfstate"
-    region         = "your-region"
-    encrypt        = true
+  required_providers {
+    aws = {
+      source  = "hashicorp/aws"
+      version = "3.50.0"
+    }
   }
-}
- 
-provider "aws" {
-  region = "your-region"
 }
